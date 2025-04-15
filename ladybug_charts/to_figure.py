@@ -222,7 +222,10 @@ def bar_chart(data: Union[List[MonthlyCollection], List[DailyCollection]],
               colors: List[Color] = None,
               title: str = None,
               center_title: bool = False,
-              stack: bool = False) -> Figure:
+              stack: bool = False,
+              layout_properties: dict = None,
+              xaxis_properties: dict = None,
+              yaxis_properties: dict = None) -> Figure:
     """Create a plotly bar chart figure from multiple ladybug monthly or daily data.
 
     Args:
@@ -237,6 +240,12 @@ def bar_chart(data: Union[List[MonthlyCollection], List[DailyCollection]],
         center_title: A boolean to set whether to center the title of the
             chart. (Default: False).
         stack: A boolean to determine whether to stack the data. (Default: False).
+        layout_properties: A dictionary to set additional layout properties of
+            the figure. (Default: None).
+        xaxis_properties: A dictionary to set additional x-axis properties of
+            the figure. (Default: None).
+        yaxis_properties: A dictionary to set additional y-axis properties of
+            the figure. (Default: None).
 
     Returns:
         A plotly figure.
@@ -293,6 +302,12 @@ def bar_chart(data: Union[List[MonthlyCollection], List[DailyCollection]],
     fig.update_yaxes(showline=True, linewidth=1,
                      linecolor="black", mirror=True, range=y_range,
                      title_text=y_title)
+    if layout_properties:
+        fig.update_layout(layout_properties)
+    if xaxis_properties:
+        fig.update_xaxes(xaxis_properties)
+    if yaxis_properties:
+        fig.update_yaxes(yaxis_properties)
 
     return fig
 
