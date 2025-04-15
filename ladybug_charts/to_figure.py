@@ -628,7 +628,7 @@ def diurnal_average_chart_from_hourly(
                 ),)
         )
 
-        # add MonthlyPerHour average dry-bulb temperature
+        # add average values
         fig.add_trace(
             go.Scatter(
                 x=x,
@@ -650,7 +650,7 @@ def diurnal_average_chart_from_hourly(
     if show_title:
         fig_title = {
             'text': title if title else var + f' ({var_unit})',
-            'y': 0.85,
+            'y': 1,
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top'
@@ -662,8 +662,12 @@ def diurnal_average_chart_from_hourly(
         fig_title = None
 
     fig.update_layout(
-
+        template='plotly_white',
+        margin=dict(l=0, r=0, t=20, b=0),
         xaxis=dict(
+            tickmode='linear',
+            tick0=0,
+            dtick=6,
             showdividers=False,
             showline=True,
             linecolor='black',
@@ -671,13 +675,15 @@ def diurnal_average_chart_from_hourly(
             ticks='outside',
             tickson='boundaries',
             tickwidth=1,
-            ticklen=5),
+            ticklen=5,
+            mirror=True),
 
         yaxis=dict(
             showline=True,
             linecolor='black',
             linewidth=1,
-            title=var_unit),
+            title=var_unit,
+            mirror=True),
 
         title=fig_title,
 
